@@ -45,9 +45,7 @@ public class Graph {
         usedPhotos.clear();
     }
 
-    int size() {
-        return this.usedPhotos.size();
-    }
+
 
     void addVertex(Photo photo) {
         adjVertices.putIfAbsent(photo, new ArrayList<>());

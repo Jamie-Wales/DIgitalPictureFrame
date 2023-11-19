@@ -26,7 +26,7 @@ public class PhotoSelector {
         boolean twoVerticalInARow = false;
 
         // Traverse the max spanning tree
-        for (Edge edge : maxTree) {
+        for (int i = 0; i < graph.adjVertices.size(); i++) {
             boolean requireVertical = lastPhotoWasVertical && !twoVerticalInARow;
 
             Photo nextPhoto = graph.findNextPhoto(currentPhoto, requireVertical);
@@ -45,17 +45,21 @@ public class PhotoSelector {
                 }
                 currentPhoto = nextPhoto;
             } else if (selectedPhotos.size() != maxTree.size()) {
-                currentPhoto = edge.getDestination();
-                if (currentPhoto.isHorizontal()) {
-                    if (twoVerticalInARow) {
-                        selectedPhotos.add(currentPhoto);
-                        lastPhotoWasVertical = false;
-                    }
-                } else {
-                    twoVerticalInARow = !twoVerticalInARow;
+                for (Edge edge : maxTree) {
+                    if (!selectedPhotos.contains(edge.getDestination())) {
+                        currentPhoto = edge.getDestination();
+                        if (currentPhoto.isHorizontal()) {
+                            if (twoVerticalInARow) {
+                                selectedPhotos.add(currentPhoto);
+                                lastPhotoWasVertical = false;
+                            }
+                        } else {
+                            twoVerticalInARow = !twoVerticalInARow;
 
-                    selectedPhotos.add(currentPhoto);
-                    lastPhotoWasVertical = true;
+                            selectedPhotos.add(currentPhoto);
+                            lastPhotoWasVertical = true;
+                        }
+                    }
                 }
             } else {
                 break;
