@@ -1,3 +1,5 @@
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Photo implements Comparable<Photo> {
@@ -23,11 +25,41 @@ public class Photo implements Comparable<Photo> {
         return id;
     }
 
+    public static int calculateInterestFactor(Set<String> photo1, Set<String>  photo2) {
+        Set<String> commonTags = new HashSet<>(photo1);
+        commonTags.retainAll(photo2);
+
+        Set<String> uniqueInPhoto1 = new HashSet<>(photo1);
+        uniqueInPhoto1.removeAll(photo2);
+
+        Set<String> uniqueInPhoto2 = new HashSet<>(photo2);
+        uniqueInPhoto2.removeAll(photo1);
+
+        return Math.min(commonTags.size(), Math.min(uniqueInPhoto1.size(), uniqueInPhoto2.size()));
+    }
 
     public void addTag(String tag) {
         tags.add(tag);
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Photo photo = (Photo) o;
+        return horizontal == photo.horizontal && id == photo.id && Objects.equals(tags, photo.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(horizontal, tags, id);
+    }
+    protected static Set<String> mergeTags(Set<String> tags1, Set<String> tags2) {
+        Set<String> mergedTags = new HashSet<>(tags1);
+        mergedTags.addAll(tags2);
+        return mergedTags;
+    }
 
     @Override
     public int compareTo(Photo o) {

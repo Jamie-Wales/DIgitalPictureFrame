@@ -14,10 +14,10 @@ public class PhotoImporter {
             line = reader.readLine();
             int noOfPhotos = Integer.parseInt(line);
 
-            for (int i = 0; i < noOfPhotos - 1; i++) {
+            for (int i = 0; i < noOfPhotos; i++) {
                 line = reader.readLine();
                 String[] parts = line.split(" ");
-                boolean isHorizontal = parts[0].equals("H");
+                boolean isHorizontal = parts[0].equals("h");
                 Set<String> tags = new HashSet<String>(Arrays.asList(parts).subList(2, parts.length));
                 Photo photo = new Photo(isHorizontal, i, tags);
                 queue.add(photo);
