@@ -1,5 +1,5 @@
 public class Edge {
-    private Photo destination;
+    private final Photo destination;
     private int weight;
 
     public Edge(Photo destination, int weight) {

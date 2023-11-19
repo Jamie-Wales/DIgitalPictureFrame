@@ -53,7 +53,6 @@ public class Graph {
     }
 
 
-
     void addVertex(Photo photo) {
         adjVertices.putIfAbsent(photo, new ArrayList<>());
     }
@@ -92,10 +91,8 @@ public class Graph {
     }
 
 
-
     boolean hasEdge(Photo v1, Photo v2) {
-        return adjVertices.getOrDefault(v1, Collections.emptyList()).contains(v2) ||
-                adjVertices.getOrDefault(v2, Collections.emptyList()).contains(v1);
+        return adjVertices.getOrDefault(v1, Collections.emptyList()).contains(v2) || adjVertices.getOrDefault(v2, Collections.emptyList()).contains(v1);
     }
 
     List<Edge> getAdjVertices(Photo label) {
