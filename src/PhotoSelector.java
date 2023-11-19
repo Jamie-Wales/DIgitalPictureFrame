@@ -31,7 +31,7 @@ public class PhotoSelector {
 
             Photo nextPhoto = graph.findNextPhoto(currentPhoto, requireVertical);
 
-            if (nextPhoto != null) {
+            if (nextPhoto != null && !selectedPhotos.contains(nextPhoto)) {
                 selectedPhotos.add(nextPhoto);
                 // Update the flags based on the orientation of the current photo
                 if (!nextPhoto.isHorizontal()) {
@@ -44,8 +44,21 @@ public class PhotoSelector {
                     twoVerticalInARow = false; // Reset as the current photo is horizontal
                 }
                 currentPhoto = nextPhoto;
+            } else if (selectedPhotos.size() != maxTree.size()) {
+                currentPhoto = edge.getDestination();
+                if (currentPhoto.isHorizontal()) {
+                    if (twoVerticalInARow) {
+                        selectedPhotos.add(currentPhoto);
+                        lastPhotoWasVertical = false;
+                    }
+                } else {
+                    twoVerticalInARow = !twoVerticalInARow;
+
+                    selectedPhotos.add(currentPhoto);
+                    lastPhotoWasVertical = true;
+                }
             } else {
-                break; // No more photos can be selected based on the criteria
+                break;
             }
         }
 
