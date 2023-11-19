@@ -17,12 +17,11 @@ public class Main {
 
         };
 
-        PriorityQueue<Photo> queue = new PriorityQueue<>(comp.reversed());
-        PhotoProcessor processor = new PhotoProcessor();
-        PhotoImporter.importPhotos("./assets/data.txt", queue, processor);
-        Graph graph = processor.buildGraph();
-        PhotoSelector photoSelector = new PhotoSelector(queue.poll(), graph);
 
+        PhotoProcessor processor = new PhotoProcessor();
+        PhotoImporter.importPhotos("./assets/data.txt", processor);
+        Graph graph = processor.buildGraph();
+        PhotoSelector photoSelector = new PhotoSelector(processor.selectRoot(), graph);
         PhotoSelector.printSlideshowDetails(photoSelector.selectPhotos());
     }
 }

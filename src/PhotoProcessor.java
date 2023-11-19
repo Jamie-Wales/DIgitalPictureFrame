@@ -1,9 +1,11 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PhotoProcessor {
 
     private Map<String, List<Photo>> tagIndex = new HashMap<>();
-
 
 
     public Photo selectRoot() {
@@ -23,8 +25,6 @@ public class PhotoProcessor {
     }
 
 
-
-
     public void indexPhoto(Photo photo) {
         for (String tag : photo.getTags()) {
             tagIndex.computeIfAbsent(tag, k -> new ArrayList<>()).add(photo);
@@ -42,9 +42,9 @@ public class PhotoProcessor {
 
             }
             for (int i = 0; i < elements.size() - 1; i++) {
-                   graph.updateEdge(elements.get(i), elements.get(i + 1), 1);
-               }
-           }
+                graph.updateEdge(elements.get(i), elements.get(i + 1), 1);
+            }
+        }
 
         return graph;
     }

@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MaxSpanningTree {
     private Map<Photo, List<Edge>> adjVertices;
@@ -22,7 +21,7 @@ public class MaxSpanningTree {
                 maxTree.add(highestEdge);
                 edges.addAll(adjVertices.get(highestEdge.getDestination()).stream()
                         .filter(edge -> !inTree.contains(edge.getDestination()))
-                        .collect(Collectors.toList()));
+                        .toList());
             }
         }
 

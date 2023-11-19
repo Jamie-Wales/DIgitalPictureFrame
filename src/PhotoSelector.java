@@ -18,8 +18,6 @@ public class PhotoSelector {
 
         // Generate the maximum spanning tree
         Set<Edge> maxTree = maxSpanningTree.maximumSpanningTree(root);
-
-        // Choose a starting point (this can vary based on your requirement)
         Photo currentPhoto = root;
         selectedPhotos.add(root);
         boolean lastPhotoWasVertical = false;

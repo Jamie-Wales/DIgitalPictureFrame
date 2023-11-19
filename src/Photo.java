@@ -13,19 +13,7 @@ public class Photo implements Comparable<Photo> {
         this.tags = tags;
     }
 
-    public boolean isHorizontal() {
-        return horizontal;
-    }
-
-    public Set<String> getTags() {
-        return tags;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public static int calculateInterestFactor(Set<String> photo1, Set<String>  photo2) {
+    public static int calculateInterestFactor(Set<String> photo1, Set<String> photo2) {
         Set<String> commonTags = new HashSet<>(photo1);
         commonTags.retainAll(photo2);
 
@@ -38,10 +26,27 @@ public class Photo implements Comparable<Photo> {
         return Math.min(commonTags.size(), Math.min(uniqueInPhoto1.size(), uniqueInPhoto2.size()));
     }
 
+    protected static Set<String> mergeTags(Set<String> tags1, Set<String> tags2) {
+        Set<String> mergedTags = new HashSet<>(tags1);
+        mergedTags.addAll(tags2);
+        return mergedTags;
+    }
+
+    public boolean isHorizontal() {
+        return horizontal;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public void addTag(String tag) {
         tags.add(tag);
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -54,11 +59,6 @@ public class Photo implements Comparable<Photo> {
     @Override
     public int hashCode() {
         return Objects.hash(horizontal, tags, id);
-    }
-    protected static Set<String> mergeTags(Set<String> tags1, Set<String> tags2) {
-        Set<String> mergedTags = new HashSet<>(tags1);
-        mergedTags.addAll(tags2);
-        return mergedTags;
     }
 
     @Override
