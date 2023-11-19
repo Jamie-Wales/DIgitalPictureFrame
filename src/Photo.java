@@ -53,12 +53,12 @@ public class Photo implements Comparable<Photo> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Photo photo = (Photo) o;
-        return horizontal == photo.horizontal && id == photo.id && Objects.equals(tags, photo.tags);
+        return id == photo.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(horizontal, tags, id);
+        return Objects.hash(id);
     }
 
     @Override
