@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class MaxSpanningTree {
-    private Map<Photo, List<Edge>> adjVertices;
+    private final Map<Photo, List<Edge>> adjVertices;
     MaxSpanningTree(Graph graph) {
         this.adjVertices = graph.adjVertices;
     }

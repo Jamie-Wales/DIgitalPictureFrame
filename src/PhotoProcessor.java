@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class PhotoProcessor {
 
-    private Map<String, List<Photo>> tagIndex = new HashMap<>();
+    private final Map<String, List<Photo>> tagIndex = new HashMap<>();
 
 
     public Photo selectRoot() {

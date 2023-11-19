@@ -3,9 +3,9 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Photo implements Comparable<Photo> {
-    private boolean horizontal;
-    private Set<String> tags;
-    private int id;
+    private final boolean horizontal;
+    private final Set<String> tags;
+    private final int id;
 
     public Photo(boolean horizontal, int id, Set<String> tags) {
         this.horizontal = horizontal;
