@@ -11,20 +11,18 @@ public class Graph {
 
         List<Edge> edges = getAdjVertices(currentPhoto);
         Photo bestPhoto = null;
-        double maxWeight = -1;
+        double maxTotalWeight = -1;
 
         for (Edge edge : edges) {
             Photo candidatePhoto = edge.getDestination();
-            if (requireVertical) {
-                if (!usedPhotos.contains(candidatePhoto) && !candidatePhoto.isHorizontal()) {
-                    if (edge.getWeight() > maxWeight) {
-                        maxWeight = edge.getWeight();
-                        bestPhoto = candidatePhoto;
-                    }
-                }
-            } else {
-                if (!usedPhotos.contains(candidatePhoto)) {
-                    maxWeight = edge.getWeight();
+
+            // Check if the candidate photo meets the requirement and has not been used
+            if ((!requireVertical || !candidatePhoto.isHorizontal()) && !usedPhotos.contains(candidatePhoto)) {
+                // Calculate the total weight of the candidate photo's adjacent neighbours
+                double candidateTotalWeight = edge.getWeight() + getTotalWeightOfNeighbours(candidatePhoto);
+
+                if (candidateTotalWeight > maxTotalWeight) {
+                    maxTotalWeight = candidateTotalWeight;
                     bestPhoto = candidatePhoto;
                 }
             }
@@ -35,6 +33,15 @@ public class Graph {
         }
 
         return bestPhoto;
+    }
+
+    private double getTotalWeightOfNeighbours(Photo photo) {
+        double totalWeight = 0;
+        List<Edge> neighbourEdges = getAdjVertices(photo);
+        for (Edge edge : neighbourEdges) {
+            totalWeight += edge.getWeight();
+        }
+        return totalWeight;
     }
 
     public void usePhoto(Photo photo) {
